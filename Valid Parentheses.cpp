@@ -1,0 +1,26 @@
+class Solution {
+public:
+    char opp(char c){
+        if(c=='(') return ')';
+        if(c==')') return '(';
+        if(c=='{') return '}';
+        if(c=='}') return '{';
+        if(c=='[') return ']';
+        return '[';
+    }
+    bool isValid(string s) {
+        stack<char> stk;
+        for(int i=0; i<s.size(); i++){
+            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+                stk.push(s[i]);
+            }
+            else{
+                if(stk.empty()) return false;
+                else if(stk.top() != opp(s[i])) return false;
+                else stk.pop();
+            }
+        }
+        if(!stk.empty()) return false;
+        return true;
+    }
+};
